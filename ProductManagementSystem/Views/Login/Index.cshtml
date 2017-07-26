@@ -1,0 +1,29 @@
+﻿@model ProductManagementSystem.Models.Customer
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <form method="post">
+            <h2>Name: <input id="customer_name" name="customer_name" type="text" /></h2>
+            <h2>Password:<input id="customer_pass" name="customer_pass" type="password" /></h2>
+            <input type="submit" value="Login" />
+
+        </form>
+                <div>@Html.ActionLink("Register", "Register", "Home", null,null)</div>
+
+        @if (TempData["Message"] != null)
+        {
+            <span style="color:red;">@TempData["Message"].ToString()</span>
+        }
+    </div>
+</body>
+</html>

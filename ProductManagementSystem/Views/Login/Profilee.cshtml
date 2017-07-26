@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ProductManagementSystem.Models.Product>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Profile</title>
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+    </style>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+
+    
+</head>
+<body>
+    <div>
+        Welcome
+        <b>@HttpContext.Current.User.Identity.Name</b>
+        <br />
+        <br />
+        @using (Html.BeginForm("Logout", "Login", FormMethod.Post))
+        {
+            <a href="javascript:;" onclick="document.forms[0].submit();">Logout</a>
+        }
+
+            <form>
+                
+                <input type="text" id="textSearch" name="searchTerm"/>
+                <input type="submit" value="Search"/>
+
+            </form>
+
+
+        <table cellpadding="2" cellspacing="2" border="1" align="center">
+            <thead>
+                <tr>
+                    <th>Product Id</th>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                    <td>@item.product_id</td>
+                    <td>@item.product_name</td>
+                    <td>@item.product_price</td>
+                    <td align="center">@Html.ActionLink("Order Now", "OrderNow", "ShoppingCart", new { id=item.product_id},null )</td>
+                </tr>
+                    }
+                
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
