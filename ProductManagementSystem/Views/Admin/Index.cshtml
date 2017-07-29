@@ -1,0 +1,35 @@
+﻿@model ProductManagementSystem.Models.Product
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        Welcome
+        <b>@HttpContext.Current.User.Identity.Name</b>
+        <br />
+        <br />
+        @using (Html.BeginForm("Logout", "Login", FormMethod.Post))
+        {
+            <a href="javascript:;" onclick="document.forms[0].submit();">Logout</a>
+        }
+
+        <input type="button" value="Insert" onclick="@("window.location.href='" + @Url.Action("Insert", "Admin") + "'");" />
+
+        <input type="button" value="Update/Edit" onclick="@("window.location.href='" + @Url.Action("Update", "Admin") + "'");" />
+
+        <input type="button" value="Delete" onclick="@("window.location.href='" + @Url.Action("Delete", "Admin") + "'");" />
+
+        
+
+
+    </div>
+</body>
+</html>

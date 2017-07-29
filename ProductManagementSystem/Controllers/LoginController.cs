@@ -27,7 +27,7 @@ namespace ProductManagementSystem.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        
 
         public ActionResult Index(Customer cust)
         {
@@ -44,11 +44,18 @@ namespace ProductManagementSystem.Controllers
                         command.Parameters.AddWithValue("@customer_pass", cust.customer_pass);
                         connection.Open();
 
-                         var userName = command.ExecuteScalar();
-                        if ( userName != null)
+                          var userName = command.ExecuteScalar();
+                        if(cust.customer_name == "admin" && cust.customer_pass == "admin")
+                        {
+                            Session["admin"] = cust.customer_name;
+                            FormsAuthentication.SetAuthCookie(cust.customer_name, false);
+                            return RedirectToAction("Index", "Admin", new { username = Session["admin"].ToString() });
+
+                        }
+                        else if ( userName != null)
                         {
                             Session["username"] = cust.customer_name;
-                            FormsAuthentication.SetAuthCookie(cust.customer_name, true);
+                            FormsAuthentication.SetAuthCookie(cust.customer_name, false);
                             return RedirectToAction("Profilee", "Login", new { username = Session["username"].ToString() });
                         }
 
